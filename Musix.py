@@ -148,7 +148,6 @@ class Artist(Musix):
         @param artist_id: The musiXmatch artist id
         @param integer page: Define the page number for paginated results
         @param integer page_size: Define the page size for paginated results.Range is 1 to 100.
-
         """
         endpoint = "artist.related.get"
         params = {
@@ -164,7 +163,6 @@ class Artist(Musix):
         @param artist_id: The musiXmatch artist id to fiter by
         @param integer page: Define the page number for paginated results
         @param integer page_size: Define the page size for paginated results.Range is 1 to 100.
-
         """
         endpoint = "artist.search"
         params = {
@@ -178,7 +176,6 @@ class Artist(Musix):
     def artist_get(self, artist_id):
         """
         @param artist_id: The musiXmatch artist id
-
         """
         endpoint = "artist.get"
         params = {
@@ -205,11 +202,9 @@ class Album(Musix):
     def __init__(self):
         Musix.__init__(self)
 
-
     def album_get(self, album_id):
         """
         @param album_id: The musiXmatch album id
-
         """
         endpoint = "album.get"
         params = {
@@ -242,7 +237,6 @@ class Lyrics(Musix):
     def __init__(self):
         Musix.__init__(self)
 
-
     def matcher_lyrics_get(self, artist_name, track_name):
         """
         Search for lyrics by artist name and track name
@@ -260,7 +254,6 @@ class Lyrics(Musix):
     def track_lyrics_get(self, track_id):
         """
         @param string track_id: The musiXmatch track id
-
         """
         endpoint = "lyrics.get"
         params = {

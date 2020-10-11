@@ -5,7 +5,7 @@ import os
 
 class Musix():
     """
-    Object to make requests via MusixMatch API and easily access results
+    Object to make requests via MusixMatch API
     """
 
     def __init__(self):

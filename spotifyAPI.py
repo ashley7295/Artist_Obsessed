@@ -5,7 +5,10 @@ from urllib.parse import urlencode
 
 import requests
 
+#removed for git purposes
 
+#client_id = ''
+#client_secret = ''
 
 #sets up auth tokens and expirations, client_id and client_secret, and token URL
 class SpotifyAPI():

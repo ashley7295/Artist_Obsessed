@@ -2,13 +2,14 @@
 import base64
 import datetime
 from urllib.parse import urlencode
+import os
+import pprint
 
 import requests
 
-#removed for git purposes
-
-#client_id = ''
-#client_secret = ''
+#you can retreive these from Spotify's developmer page by signing in and starting a new project
+client_id = os.environ.get('CLIENT_ID')
+client_secret = os.environ.get('CLIENT_SECRET')
 
 #sets up auth tokens and expirations, client_id and client_secret, and token URL
 class SpotifyAPI():
@@ -26,7 +27,7 @@ class SpotifyAPI():
         self.client_secret = client_secret
 
 
-#From spotify API documentation
+#From spotify API documentation:
 
 #Access tokens are deliberately set to expire after a short time, 
  #after which new tokens may be granted by supplying the refresh token originally obtained during the authorization code exchange.
@@ -75,26 +76,32 @@ class SpotifyAPI():
         self.access_token_did_expire = expires < now
         return True
 
-    #def get_access_token(self):
-    #    token = self.access_token
-    #    expires = self.access_token_expires
-    #    now = datetime.datetime.now()
-    #    if expires < now:
-    #        self.preform_authorization()
-    #        return self.get_access_token()
-    #    elif token == None:
-    #        self.preform_authorization()
-    #        return self.get_access_token()
-    #    return token
+    #GET requests for searching for things from the API requires Auth
 
-    #required token type is Bearer
-    #def get_resource_header(self):
-    #    access_token = self.get_access_token()
-    #    headers = {'Authorization':f'Bearer{access_token}'}
-    #    return headers
 
 client = SpotifyAPI(client_id, client_secret)
 
 #tests if preform auth returns true and if acess token is retrieved
-print(client.preform_authorization())
-print(client.access_token)
+#print(client.preform_authorization())
+#print(client.access_token)
+
+access_token = client.access_token
+
+        #TEMP USER INPUT VALUE adding test variable here and will repalce this with UI value 
+querie_search = 'beyonce'
+        #querie type should always be artist
+querie_type = 'artist'
+
+headers = {'Authorization': f'Bearer {access_token}'}
+endpoint = 'https://api.spotify.com/v1/search'
+data = urlencode({'q':f'{querie_search}', 'type':f'{querie_type}'}) #using urlencode to make it a url ready string
+
+lookup_url = f'{endpoint}?{data}'
+r = requests.get(lookup_url,headers=headers)
+#print(r.json())
+followers = r.json()
+    
+follower_count = followers['total']
+
+print(follower_count)
+

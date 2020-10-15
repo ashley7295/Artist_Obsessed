@@ -109,8 +109,20 @@ class SpotifyAPI():
         
         return followers
 
+    def get_follower_count(self, followers):
+        follower_count = followers['artists']['items']
+        for i in follower_count:
+            followers = i['followers']['total']
+            follower_string = f'This artist has {followers} followers.'
+            follower_list = []
+            follower_list.append(follower_string)
+
+            if len(follower_list) == 1:
+                return follower_list
+
 spotify = SpotifyAPI(client_id, client_secret)
 
+#needs artist name but querie type will always be artist
 data = spotify.search_artist_data('beyonce', 'artist')
-
-print(data)
+followers = spotify.get_follower_count(data)
+print(followers)

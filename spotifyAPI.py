@@ -76,32 +76,41 @@ class SpotifyAPI():
         self.access_token_did_expire = expires < now
         return True
 
+    #preform_authorization does not get the access toekn, checks to see if it exists or hasnt expired
+    def get_access_token(self):
+        token = self.access_token
+        expires = self.access_token_expires
+        now = datetime.datetime.now()
+
+        if expires < now:
+            self.preform_authorization()
+            return self.get_access_token()
+        elif token == None:
+            self.preform_authorization()
+            return self.get_access_token()
+        return token
+
+
+    def get_user_search_q(self):
+        artist = input('Please enter the artist you want to search for: ')
+        return artist.lower()
+
     #GET requests for searching for things from the API requires Auth
+    def search_artist_data(self, querie, querie_type = 'artist'):
+        access_token = self.get_access_token()
 
+        headers = {'Authorization': f'Bearer {access_token}'}
+        endpoint = 'https://api.spotify.com/v1/search'
+        data = urlencode({'q':querie, 'type':querie_type}) #using urlencode to make it a url ready string
 
-client = SpotifyAPI(client_id, client_secret)
+        lookup_url = f'{endpoint}?{data}'
+        r = requests.get(lookup_url,headers=headers)
+        followers = r.json()
+        
+        return followers
 
-#tests if preform auth returns true and if acess token is retrieved
-#print(client.preform_authorization())
-#print(client.access_token)
+spotify = SpotifyAPI(client_id, client_secret)
 
-access_token = client.access_token
+data = spotify.search_artist_data('beyonce', 'artist')
 
-        #TEMP USER INPUT VALUE adding test variable here and will repalce this with UI value 
-querie_search = 'beyonce'
-        #querie type should always be artist
-querie_type = 'artist'
-
-headers = {'Authorization': f'Bearer {access_token}'}
-endpoint = 'https://api.spotify.com/v1/search'
-data = urlencode({'q':f'{querie_search}', 'type':f'{querie_type}'}) #using urlencode to make it a url ready string
-
-lookup_url = f'{endpoint}?{data}'
-r = requests.get(lookup_url,headers=headers)
-#print(r.json())
-followers = r.json()
-    
-follower_count = followers['total']
-
-print(follower_count)
-
+print(data)

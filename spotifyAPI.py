@@ -7,7 +7,7 @@ import pprint
 
 import requests
 
-#you can retreive these from Spotify's developmer page by signing in and starting a new project
+#you can retreive these from Spotify's developer page by signing in and starting a new project
 client_id = os.environ.get('CLIENT_ID')
 client_secret = os.environ.get('CLIENT_SECRET')
 
@@ -28,13 +28,12 @@ class SpotifyAPI():
 
 
 #From spotify API documentation:
+# Access tokens are deliberately set to expire after a short time, 
+# after which new tokens may be granted by supplying the refresh token originally obtained during the authorization code exchange.
+# The request is sent to the token endpoint of the Spotify Accounts service:
 
-#Access tokens are deliberately set to expire after a short time, 
- #after which new tokens may be granted by supplying the refresh token originally obtained during the authorization code exchange.
- #The request is sent to the token endpoint of the Spotify Accounts service:
 
     #POST request is required
-
     #The header of this post request must contain authorization
     def get_client_credentials(self):
         #returns a base64 encoded string for the auth header
@@ -54,6 +53,7 @@ class SpotifyAPI():
     def get_token_data(self):
         return{'grant_type': 'client_credentials'}
 
+    #preforms auth but does not retrieve the access token
     def preform_authorization(self):
         token_url = self.token_url
         token_data = self.get_token_data()
@@ -76,7 +76,7 @@ class SpotifyAPI():
         self.access_token_did_expire = expires < now
         return True
 
-    #preform_authorization does not get the access toekn, checks to see if it exists or hasnt expired
+    #preform_authorization does not get the access toekn, only checks to see if it exists or hasnt expired
     def get_access_token(self):
         token = self.access_token
         expires = self.access_token_expires
@@ -90,13 +90,14 @@ class SpotifyAPI():
             return self.get_access_token()
         return token
 
-
+    #temp function, this may be moved into ui.py later
     def get_user_search_q(self):
         artist = input('Please enter the artist you want to search for: ')
         return artist.lower()
 
-    #GET requests for searching for things from the API requires Auth
-    def search_artist_data(self, querie, querie_type = 'artist'):
+    #GET requests for searching for things from the API. requires Auth.
+    def search_artist_data(self, querie):
+        querie_type = 'artist' #querie type will always be artist for purposes of this program
         access_token = self.get_access_token()
 
         headers = {'Authorization': f'Bearer {access_token}'}
@@ -113,16 +114,18 @@ class SpotifyAPI():
         follower_count = followers['artists']['items']
         for i in follower_count:
             followers = i['followers']['total']
-            follower_string = f'This artist has {followers} followers.'
+            follower_string = f'This artist has {followers:,} followers.' #f string formats the big numbers with commas
             follower_list = []
             follower_list.append(follower_string)
 
-            if len(follower_list) == 1:
-                return follower_list
+            if len(follower_list) == 1: #needs to only grab the first result in the artist "items"
+                for i in follower_list: #grabs the only item in the list and returns it so it does not return as a list item
+                    return i
 
 spotify = SpotifyAPI(client_id, client_secret)
 
-#needs artist name but querie type will always be artist
-data = spotify.search_artist_data('beyonce', 'artist')
+#TEST CODE, THIS WILL BE CLEANED UP ONCE UI.py is created.
+#needs artist name and querie type but querie type will always be artist
+data = spotify.search_artist_data('beyonce')
 followers = spotify.get_follower_count(data)
 print(followers)

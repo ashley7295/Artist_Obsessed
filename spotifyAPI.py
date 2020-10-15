@@ -27,10 +27,10 @@ class SpotifyAPI():
         self.client_secret = client_secret
 
 
-#From spotify API documentation:
-# Access tokens are deliberately set to expire after a short time, 
-# after which new tokens may be granted by supplying the refresh token originally obtained during the authorization code exchange.
-# The request is sent to the token endpoint of the Spotify Accounts service:
+    #From spotify API documentation:
+    # Access tokens are deliberately set to expire after a short time, 
+    # after which new tokens may be granted by supplying the refresh token originally obtained during the authorization code exchange.
+    # The request is sent to the token endpoint of the Spotify Accounts service:
 
 
     #POST request is required
@@ -122,10 +122,11 @@ class SpotifyAPI():
                 for i in follower_list: #grabs the only item in the list and returns it so it does not return as a list item
                     return i
 
+
 spotify = SpotifyAPI(client_id, client_secret)
 
 #TEST CODE, THIS WILL BE CLEANED UP ONCE UI.py is created.
-#needs artist name and querie type but querie type will always be artist
+#needs artist name. querie type will always be artist
 data = spotify.search_artist_data('beyonce')
 followers = spotify.get_follower_count(data)
 print(followers)

@@ -1,5 +1,12 @@
+<<<<<<< HEAD
 *.pyc
 __pycache__
 .vscode
 .idea
 env
+=======
+.env
+venv
+.vscode
+.DS_Store
+>>>>>>> 9f65418ba4c062d848b4eecbe19599801d3bb8a8

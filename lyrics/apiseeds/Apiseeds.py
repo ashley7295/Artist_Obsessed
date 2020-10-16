@@ -1,16 +1,15 @@
 import requests
-from dotenv import load_dotenv
-import os
 
 class Apiseeds():
     """
     Object to make requests via apiseeds lyrics api https://apiseeds.com/documentation/lyrics
     """
 
-    def __init__(self):
+    def __init__(self, api_key):
         # load enviornment variables
-        load_dotenv()
-        self._API_KEY = os.getenv("apiseeds_api_key")
+        if api_key == None:
+            raise Exception("api_key not set")
+        self._API_KEY = api_key
         self.API_ROOT = "https://orion.apiseeds.com/api/music/lyric/"
         self.base_params = {
             "apikey": self._API_KEY,

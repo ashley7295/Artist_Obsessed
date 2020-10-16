@@ -92,13 +92,13 @@ class SpotifyAPI():
 
 
     #GET requests for searching for things from the API. requires Auth.
-    def search_artist_data(self, querie):
+    def search_artist_data(self, query):
         querie_type = 'artist' #querie type will always be artist for purposes of this program
         access_token = self.get_access_token()
 
         headers = {'Authorization': f'Bearer {access_token}'}
         endpoint = 'https://api.spotify.com/v1/search'
-        data = urlencode({'q':querie, 'type':querie_type}) #using urlencode to make it a url ready string
+        data = urlencode({'q':query, 'type':querie_type}) #using urlencode to make it a url ready string
 
         lookup_url = f'{endpoint}?{data}'
         r = requests.get(lookup_url,headers=headers)

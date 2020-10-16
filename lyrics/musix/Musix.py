@@ -22,7 +22,7 @@ class Musix():
         query.update(params)
         try:
             response = requests.get(f"{self.MUSIC_MATCH_API_ROOT}{endpoint}", query)
-            return response.json()
+            return response
         except requests.exceptions.RequestException as exception:
             # TODO: what sould be done with this exception
             logging.info(exception)

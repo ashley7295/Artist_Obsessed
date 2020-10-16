@@ -16,9 +16,13 @@ class Apiseeds():
         }
 
     def call_service(self, artist, track):
-        response = requests.get(
-            f"{self.API_ROOT}{artist}{track}", self.base_params)
-        return response.json()
+        try:
+            response = requests.get(
+                f"{self.API_ROOT}{artist}/{track}", self.base_params)
+            return response
+        except Exception as err:
+            print(err)
+
 
     def get_lyrics(self, artist, track):
         """

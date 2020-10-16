@@ -90,10 +90,6 @@ class SpotifyAPI():
             return self.get_access_token()
         return token
 
-    #temp function, this may be moved into ui.py later
-    def get_user_search_q(self):
-        artist = input('Please enter the artist you want to search for: ')
-        return artist.lower()
 
     #GET requests for searching for things from the API. requires Auth.
     def search_artist_data(self, querie):

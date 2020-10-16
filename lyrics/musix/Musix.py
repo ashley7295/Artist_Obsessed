@@ -1,17 +1,17 @@
 import requests
-from dotenv import load_dotenv
 import os
-
+import logging
 
 class Musix():
     """
     Object to make requests via MusixMatch API
     """
 
-    def __init__(self):
+    def __init__(self, api_key):
         # load enviornment variables
-        load_dotenv()
-        self._API_KEY = os.getenv("musix_api_key")
+        if api_key == None:
+            raise Exception("api_key not set")
+        self._API_KEY = api_key
         self.MUSIC_MATCH_API_ROOT = "https://api.musixmatch.com/ws/1.1/"
         self.base_params = {
             "apikey": self._API_KEY,
@@ -20,15 +20,17 @@ class Musix():
     def call_service(self, endpoint, params):
         query = self.base_params.copy()
         query.update(params)
-
-        response = requests.get(
-            f"{self.MUSIC_MATCH_API_ROOT}{endpoint}", query)
-        return response.json()
+        try:
+            response = requests.get(f"{self.MUSIC_MATCH_API_ROOT}{endpoint}", query)
+            return response.json()
+        except requests.exceptions.RequestException as exception:
+            # TODO: what sould be done with this exception
+            logging.info(exception)
 
 
 class Track(Musix):
-    def __init__(self):
-        Musix.__init__(self)
+    def __init__(self, api_key):
+        Musix.__init__(self, api_key)
 
     def album_track_get(self, album_id, page=0, page_size=20, has_lyrics=True):
         """
@@ -140,8 +142,8 @@ class Track(Musix):
 
 
 class Artist(Musix):
-    def __init__(self):
-        Musix.__init__(self)
+    def __init__(self, api_key):
+        Musix.__init__(self, api_key)
 
     def artist_related_get(self, artist_id, page=0, page_size=20):
         """
@@ -199,8 +201,8 @@ class Artist(Musix):
 
 
 class Album(Musix):
-    def __init__(self):
-        Musix.__init__(self)
+    def __init__(self, api_key):
+        Musix.__init__(self, api_key)
 
     def album_get(self, album_id):
         """
@@ -234,8 +236,8 @@ class Album(Musix):
 
 
 class Lyrics(Musix):
-    def __init__(self):
-        Musix.__init__(self)
+    def __init__(self, api_key):
+        Musix.__init__(self, api_key)
 
     def matcher_lyrics_get(self, artist_name, track_name):
         """

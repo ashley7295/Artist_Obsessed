@@ -76,7 +76,7 @@ class SpotifyAPI():
         self.access_token_did_expire = expires < now
         return True
 
-    #preform_authorization does not get the access toekn, only checks to see if it exists or hasnt expired
+    #preform_authorization does not get the access token, only checks to see if it exists or hasnt expired
     def get_access_token(self):
         token = self.access_token
         expires = self.access_token_expires

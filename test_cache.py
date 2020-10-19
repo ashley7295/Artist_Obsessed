@@ -26,6 +26,9 @@ class TestCache(unittest.TestCase):
         storage = self.cache.storage
         self.assertEqual(storage, {'somekey2': {'vavagw': {'expiration': 30, 'value': {'f': 1}}}})
 
+    def test_invalid_keys(self):
+        # TODO add test for when a key is requested and is invalid
+        pass
 
 if __name__ == "__main__":
     unittest.main()

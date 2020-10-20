@@ -4,7 +4,7 @@ db = SqliteDatabase('bookmarks.sqlite')
 
 class Bookmarks(Model):
     followers = CharField()
-    albumArt = CharField()
+    album_art = CharField()
     lyrics = CharField()
     id = None
 
@@ -12,7 +12,7 @@ class Bookmarks(Model):
         database = db
 
     def __str__(self):
-        return f'{self.id}, {self.followers}, {self.albumArt}, {self.lyrics}'
+        return f'{self.id}, {self.followers}, {self.album_art}, {self.lyrics}'
 
 db.connect()
 db.create_tables([Bookmarks])
@@ -21,10 +21,14 @@ db.create_tables([Bookmarks])
 def delete_bookmarks():
     Bookmarks.delete().execute()
 
+#creates a new bookmark
+def add_new_bookmark(followers, album_art, lyrics):
+    new_bookmark = Bookmarks(followers = followers, album_art = album_art, lyrics = lyrics)
+    new_bookmark.save()
+
 #gets total number of bookmarks
 def bookmark_count():
     count = Bookmarks.select()
-
     return count
 
 #searches for bookmark by ID

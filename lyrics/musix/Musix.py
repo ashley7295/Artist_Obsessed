@@ -257,7 +257,7 @@ class Lyrics(Musix):
         """
         @param string track_id: The musiXmatch track id
         """
-        endpoint = "lyrics.get"
+        endpoint = "track.lyrics.get"
         params = {
             "track_id": track_id
         }

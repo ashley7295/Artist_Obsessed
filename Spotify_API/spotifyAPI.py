@@ -98,7 +98,7 @@ class SpotifyAPI():
 
         headers = {'Authorization': f'Bearer {access_token}'}
         endpoint = 'https://api.spotify.com/v1/search'
-        data = {'q':query,'type':querie_type} #using urlencode to make it a url ready string
+        data = {'q':query,'type':querie_type}
         
         lookup_url = f'{endpoint}'
         r = requests.get(lookup_url,headers=headers, params = data)
@@ -119,8 +119,8 @@ class SpotifyAPI():
                     return i
 
     
-spotify = SpotifyAPI(client_id, client_secret)
+#spotify = SpotifyAPI(client_id, client_secret)
         
-data = spotify.search_artist_data('beyonce')
-followers = spotify.get_follower_count(data)
-print(followers)
+#data = spotify.search_artist_data('beyonce')
+#followers = spotify.get_follower_count(data)
+#print(followers)

@@ -98,10 +98,10 @@ class SpotifyAPI():
 
         headers = {'Authorization': f'Bearer {access_token}'}
         endpoint = 'https://api.spotify.com/v1/search'
-        data = urlencode({'q':query, 'type':querie_type}) #using urlencode to make it a url ready string
+        data = {'q':query,'type':querie_type} #using urlencode to make it a url ready string
         
-        lookup_url = f'{endpoint}?{data}'
-        r = requests.get(lookup_url,headers=headers)
+        lookup_url = f'{endpoint}'
+        r = requests.get(lookup_url,headers=headers, params = data)
         followers = r.json()
         
         return followers

@@ -18,8 +18,8 @@ db.connect()
 db.create_tables([Bookmarks])
 
 #deletes all bookmarks
-#def delete_bookmarks():
-#    Bookmarks.delete().execute()
+def delete_bookmarks():
+    Bookmarks.delete().execute()
 
 #creates a new bookmark
 def add_new_bookmark(followers, album_art, lyrics):

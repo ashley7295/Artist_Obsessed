@@ -1,17 +1,21 @@
-#created module to have something in the amster branch
-import bookmarks
+#created module to have something in the master branch
+import os
+
+from Spotify_API.spotifyAPI import SpotifyAPI
 
 
-#def main():
-    #save_bookmark()
+client_id = os.environ.get('CLIENT_ID')
+client_secret = os.environ.get('CLIENT_SECRET')
 
-#TODO add some menu code
+spotify = SpotifyAPI(client_id, client_secret)
 
-#gets bookmark data and saves it as a bookmark 
-#def save_bookmark():
+def main():
+    #replace this and use where needed once UI and Menu are created
+    data = spotify.search_artist_data('beyonce')
+    followers = spotify.get_follower_count(data)
+    print(followers) 
 
-    #TODO function that gets follower data
-    #TODO function that gets album artwork data
-    #TODO function that gets lyric data
 
-    #bookmarks.add_new_bookmark(followers, album_art, lyrics)
+
+if __name__ == '__main__':
+    main()

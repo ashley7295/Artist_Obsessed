@@ -33,13 +33,13 @@ def bookmark_count():
 
 #searches for bookmark by ID
 #TODO test this function once bookmarks can be created
-def bookmark_by_id(id):
+def search_by_id(id):
     rows = Bookmarks.select().where(Bookmarks.id == id)
 
     return rows
 
 #deletes bookmark by ID
-def delete_bookmark_by_id(id):
+def delete_by_id(id):
     Bookmarks.delete().where(Bookmarks.id == id).execute()
     print('Your bookmark has been deleted')
 

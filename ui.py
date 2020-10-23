@@ -19,6 +19,10 @@ def save_bookmark():
     if save_bookmark == 'Y' or 'y':
         return True
 
+def search_by_id():
+    ID = int(input('Please enter the ID of the Bookmark you would like to select: '))
+    return ID
+
 def print_message(msg):
     return print(msg)
 

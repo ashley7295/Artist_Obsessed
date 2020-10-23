@@ -1,12 +1,13 @@
 #created module to have something in the amster branch
 
 import ui
-#import bookmarks
+import bookmarks
 
 
 def preform_menu_selection ():
 
     menu = True
+
 
     while menu:
         user_selection = ui.print_menu()
@@ -22,10 +23,12 @@ def preform_menu_selection ():
             search_results()
 
         elif user_selection == 3: 
-            #bookmarks.search_by_ID
-            pass
+            ID = ui.search_by_id()
+            bookmarks.delete_by_id(ID)
+
         elif user_selection == 4: 
-            #bookmarks.delete_by_ID
+            ID = ui.search_by_id()
+            bookmarks.delete_by_id(ID)
             pass
         elif user_selection == 5: 
             quit_program()
@@ -41,4 +44,4 @@ def search_results():
     #print = {lyrics}
     pass
 
-
+preform_menu_selection()

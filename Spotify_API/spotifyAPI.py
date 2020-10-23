@@ -118,9 +118,3 @@ class SpotifyAPI():
                 for i in follower_list: #grabs the only item in the list and returns it so it does not return as a list item
                     return i
 
-    
-#spotify = SpotifyAPI(client_id, client_secret)
-        
-#data = spotify.search_artist_data('beyonce')
-#followers = spotify.get_follower_count(data)
-#print(followers)

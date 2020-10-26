@@ -9,13 +9,8 @@ client_secret = os.environ.get('CLIENT_SECRET')
 
 spotify = SpotifyAPI(client_id, client_secret)
 
-def main():
-    #replace this and use where needed once UI and Menu are created
-    data = spotify.search_artist_data('beyonce')
-    followers = spotify.get_follower_count(data)
-    print(followers) 
 
-
-
-if __name__ == '__main__':
-    main()
+#replace this and use where needed once UI and Menu are created
+data = spotify.search_artist_data('beyonce')
+followers = spotify.get_follower_count(data)
+print(followers) 

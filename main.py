@@ -1,5 +1,3 @@
-#created module to have something in the amster branch
-
 import ui
 import bookmarks
 
@@ -51,6 +49,20 @@ def search_results():
     #TODO set variables for results of our APIs
 
     #followers = SpotifyAPI
+    
+    # import os
+    # from Spotify_API.spotifyAPI import SpotifyAPI
+    # client_id = os.environ.get('CLIENT_ID')
+    # client_secret = os.environ.get('CLIENT_SECRET')
+
+    # spotify = SpotifyAPI(client_id, client_secret)
+
+    # def main():
+    #     #replace this and use where needed once UI and Menu are created
+    #     data = spotify.search_artist_data('beyonce')
+    #     followers = spotify.get_follower_count(data)
+    #     print(followers) 
+
     #album_artwork = artworkAPI
     #lyrics = lyricsAPI
     
@@ -86,6 +98,5 @@ def save_new_bookmark():
 
     #bookmarks.add_new_bookmark(artist, album, song, followers, album_art, lyrics)
     pass
-
 if __name__ == '__main__':
     main()

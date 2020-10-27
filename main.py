@@ -11,6 +11,7 @@ def preform_menu_selection ():
     menu = True
 
 
+
     while menu:
         user_selection = ui.print_menu()
         
@@ -100,3 +101,5 @@ def save_new_bookmark():
     pass
 if __name__ == '__main__':
     main()
+
+

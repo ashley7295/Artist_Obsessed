@@ -5,11 +5,12 @@ import shutil
 import os
 import glob
 from pprint import pprint
+from dotenv import load_dotenv
+
+load_dotenv()
 
 url = f"http://ws.audioscrobbler.com/2.0"
-# key = os.environ.get("COVER_KEY") # "2066002fabe29cf09d7ed5a00c804ac6"
-key = "2066002fabe29cf09d7ed5a00c804ac6"
-print(key)
+key = os.environ.get("COVER_KEY")
 
 album_input = input("Enter album title: ")
 album = f"{album_input}"

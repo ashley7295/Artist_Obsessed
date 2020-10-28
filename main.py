@@ -6,6 +6,7 @@ from Spotify_API.spotifyAPI import SpotifyAPI
 import os
 
 
+
 client_id = os.environ.get('CLIENT_ID')
 client_secret = os.environ.get('CLIENT_SECRET')
 
@@ -24,12 +25,16 @@ def perform_menu_selection ():
         
         if user_selection == 1:  
             
-            print_search_results()
+            artist_name = ui.get_artist_name()
+            album_title = ui.get_album_name()
+            song_title = ui.get_song_name()
+
+            print_search_results(artist_name, album_title, song_title)
 
             save = ui.save_bookmark()
 
             if save == True:
-                save_new_bookmark()
+                save_new_bookmark(artist_name, album_title, song_title)
             elif save == False:
                 print('Your bookmark will not be saved.')
             
@@ -65,17 +70,11 @@ def get_spotifyAPI_data(artist):
 #def get_lyricsAPI_data([ENTER PARAMS NEEDED HERE]):
     #return results
 
-
-def print_search_results():
-
-    #gets user entered search queries
-    artist_name = ui.get_artist_name()
-    album_title = ui.get_album_name()
-    song_title = ui.get_song_name()
+def print_search_results(artist_name, album_title, song_title):
 
     followers = get_spotifyAPI_data(artist_name)
     
-    #TODO finish - code from above functions go here
+    #TODO finish -- code from above functions go here
     #album_art = get_album_artworkAPI_data()
     #lyrics = get_lyricsAPI_data()
 
@@ -89,9 +88,10 @@ def print_search_results():
     pass
     
 
-def save_new_bookmark():
+def save_new_bookmark(artist, album, song):
     
-    followers = get_spotifyAPI_data()
+    followers = get_spotifyAPI_data(artist)
+
     #TODO
     #album_art = get_album_artworkAPI_data()
     #lyrics = get_lyricsAPI_data()

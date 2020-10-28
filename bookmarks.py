@@ -15,7 +15,7 @@ class Bookmarks(Model):
         database = db
 
     def __str__(self):
-        return f'{self.id},{self.artist}, {self.album_title}, {self.song_title}, {self.followers}, {self.album_art}, {self.lyrics}'
+        return f'{self.id}, {self.artist}, {self.album_title}, {self.song_title}, {self.followers}, {self.album_art}, {self.lyrics}'
 
 db.connect()
 db.create_tables([Bookmarks])

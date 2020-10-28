@@ -57,3 +57,5 @@ class TestSpotifyAPI(TestCase):
         response = spotify.search_artist_data(mock_querie)
         self.assertEqual(response, self.test_response)
 
+if __name__ == '__main__':
+    unittest.main()

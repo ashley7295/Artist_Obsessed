@@ -5,9 +5,10 @@ from peewee import *
 import bookmarks
 from bookmarks import Bookmarks
 
-tables = [Bookmarks]
 
 test_db = SqliteDatabase('test_bookmarks.sqlite')
+
+tables = [Bookmarks]
 
 class TestBookmarks(TestCase):
 

@@ -1,5 +1,25 @@
+def get_string(message):
+    while True:
+        response = input(message)
+        if response is not None:
+            return response
 
+def get_int(message):
+    while True:
+        try:
+            response = int(input(message))
+            return response
+        except ValueError:
+            print('Please enter a number ')
 
+def get_int_in_range(message, min, max):
+    while True:
+        response = get_int(message)
+        if response in range (min, max + 1):
+            return response
+        else:
+            print(f'Please enter a valid number between {min} & {max}')
+        
 def program_intro_message():
     print('\n WELCOME TO ~ARTIST OBSESSED~ \n')
     print('The program will search for information about an artist and provide thier follower count, album artwork and song lyrics.')
@@ -7,15 +27,18 @@ def program_intro_message():
     print('please select an option below to begin: \n')
 
 def get_artist_name():
-    artist_name = input('What is the name of the artist you are searching for?: ')
+    message = 'What is the name of the artist you are searching for?: '
+    artist_name = get_string(message)
     return artist_name
 
 def get_album_name():
-    album_name = input('What is the name of the album you are looking for?: ')
+    message = 'What is the name of the album you are looking for?: '
+    album_name = get_string(message)
     return album_name
 
 def get_song_name():
-    song_title = input('What is the name of the song you are looking for?: ')
+    message = 'What is the name of the song you are looking for?: '
+    song_title = get_string(message)
     return song_title
 
 def save_bookmark():
@@ -29,8 +52,9 @@ def save_bookmark():
         print('Please enter a valid Y/N entry.')
 
 def search_by_id():
-    ID = int(input('Please enter the ID of the Bookmark you would like to select: '))
-    return ID
+    message = 'Please enter the ID of the Bookmark you would like to select: '
+    id = get_int(message)
+    return id
 
 def print_message(msg):
     return print(msg)
@@ -43,9 +67,6 @@ def print_menu():
     print(' 4: Delete a Bookmark by ID')
     print(' 5: Quit')
 
-    user_selection = int(input('Please enter the number of the menu item you would like to select: '))
-
-    if user_selection in range (1, 6):
-        return user_selection
-    else:
-        print('Please enter a valid number between 1 & 5')
+    message = 'Please enter the number of the menu item you would like to select: '
+    user_selection = get_int_in_range(message, 1, 6)
+    return user_selection

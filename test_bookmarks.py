@@ -44,7 +44,7 @@ class TestBookmarks(TestCase):
     
     def test_get_bookmark_by_id(self):
         self.add_test_data()
-        result = bookmarks.bookmark_by_id(self.bookmark1.id)
+        result = bookmarks.search_by_id(self.bookmark1.id)
         self.assertEqual(result, self.bookmark1)
 
 if __name__ == '__main__':

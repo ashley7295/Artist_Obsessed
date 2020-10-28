@@ -1,94 +1,118 @@
 import ui
+import os
 import bookmarks
+from menu import Menu
+from Spotify_API.spotifyAPI import SpotifyAPI
+from dotenv import load_dotenv
+from apiseeds.Apiseeds import Apiseeds
+import cover_art_api
 
 def main():
-
+    load_dotenv()
+    menu = Menu()
+    setup_menu(menu)
     ui.program_intro_message()
-    preform_menu_selection()
+    while True:
+        ui.print_message(menu)
+        selection = ui.get_int_in_range('', 1, menu.get_menu_length())
+        action = menu.get_option(selection)
+        action()
 
-def preform_menu_selection ():
 
-    menu = True
+def setup_menu(menu):
+    menu.add(1, 'Start Search query', search)
+    menu.add(2, 'Display all Bookmarks', display_all_bookmarks)
+    menu.add(3, 'Search for a bookmark by ID', search_for_bookmark_by_id)
+    menu.add(4, 'Delete a Bookmark by ID', delete_bookmark)
+    menu.add(5, 'Quit', quit_program)
 
 
+def display_all_bookmarks():
+    # bookmarks.get_all_bookmarks()
+    pass
 
-    while menu:
-        user_selection = ui.print_menu()
-        
-        if user_selection == 1:  
-            
-            user_search()
-            print_search_results()
+def search_for_bookmark_by_id():
+    pass
 
-            save = ui.save_bookmark()
+def delete_bookmark():
+    # ID = ui.search_by_id()
+    # bookmarks.delete_by_id(ID)
+    pass
 
-            if save == True:
-                save_new_bookmark()
-            elif save == False:
-                print('Your bookmark will not be saved.')
-            
-
-        elif user_selection == 2: 
-            bookmarks.get_all_bookmarks()
-        elif user_selection == 3: 
-            ID = ui.search_by_id()
-            bookmarks.delete_by_id(ID)
-
-        elif user_selection == 4: 
-            ID = ui.search_by_id()
-            bookmarks.delete_by_id(ID)
-            pass
-        elif user_selection == 5: 
-            quit_program()
-            menu = False
 
 def quit_program():
     ui.print_message('Bye and thank you!')
+    exit()
 
-
-def search_results():
-    #TODO set variables for results of our APIs
-
-    #followers = SpotifyAPI
+def search_spotify(artist):
+    """
+    @param string artist: artist to search for
+    @returns int: follower count
+    """
+    client_id = os.environ.get('SPOTIFY_CLIENT_ID')
+    client_secret = os.environ.get('SPOTIFY_CLIENT_SECRET')
     
-    # import os
-    # from Spotify_API.spotifyAPI import SpotifyAPI
-    # client_id = os.environ.get('CLIENT_ID')
-    # client_secret = os.environ.get('CLIENT_SECRET')
+    spotify = SpotifyAPI(client_id, client_secret)
 
-    # spotify = SpotifyAPI(client_id, client_secret)
-
-    # def main():
-    #     #replace this and use where needed once UI and Menu are created
-    #     data = spotify.search_artist_data('beyonce')
-    #     followers = spotify.get_follower_count(data)
-    #     print(followers) 
-
-    #album_artwork = artworkAPI
-    #lyrics = lyricsAPI
+    data = spotify.search_artist_data(artist)
+    followers = spotify.get_follower_count(data)
     
-    #return followers, album_artwork, lyrics
-    pass
+    return followers
+
+
+
+def search_artwork(artist, album):
+    """
+    @param string artist: artist to search for
+    @returns string: image url
+    """
+    return cover_art_api.get_album_art(artist, album)
+    
+
+def search_lyrics(artist, song_name):
+    """
+    @param string artist: artist to search for
+    @param string song_name: song_name to search for
+    @returns string: the lyrics or False if not found
+    """
+
+    api_key = os.getenv("APISEEDS_KEY")
+    apiseeds = Apiseeds(api_key)
+
+    response = apiseeds.get_lyrics(artist, song_name)
+
+    if response.ok and response.status_code == 200:
+        r = response.json().get('result')
+        track = r.get('track')
+        return track['text']
+    else:
+        print(response.status_code)
+        return 'Lyrics not found.'
 
 #gets variables for the UI of the search queries
-def user_search():
+def search():
     artist_name = ui.get_artist_name()
     album_title = ui.get_album_name()
     song_title = ui.get_song_name()
-    return artist_name, album_title, song_title
+    follower_count = search_spotify(artist_name)
+    lyrics = search_lyrics(artist_name, song_title)
+    artwork = search_artwork(artist_name, album_title)
 
+    results = {
+        'artist_name': artist_name,
+        'album_title': album_title,
+        'song_title': song_title,
+        'artwork': artwork,
+        'lyrics': lyrics,
+        'follower_count': follower_count
+    }
+    print_search_results(results)
 
-def print_search_results():
-    #TODO once we can finish the search_results() function, we can finish this one
-    
-    #artist, album, song = user_search()
-    #followers, album_art, lyrics = search_results()
-    
-    #print = {artist} has {followers} followers on spotify
-    #print = Here is the album artwork for {album}, {album_art}
-    #print = Here are the lyrics for {song}: 
-    #print = {lyrics}
-    pass
+def print_search_results(results):
+    print(f"{results.get('artist_name')} has {results.get('follower_count')} followers on spotify")
+    print(f"Here is the album artwork for {results.get('album_title')}, {results.get('artwork')}")
+    print(f"Here are the lyrics for {results.get('song_title')}:") 
+    print(results.get('lyrics'))
     
 
 def save_new_bookmark():
@@ -99,6 +123,8 @@ def save_new_bookmark():
 
     #bookmarks.add_new_bookmark(artist, album, song, followers, album_art, lyrics)
     pass
+
+
 if __name__ == '__main__':
     main()
 

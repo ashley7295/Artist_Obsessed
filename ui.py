@@ -60,15 +60,3 @@ def search_by_id():
 def print_message(msg):
     return print(msg)
 
-
-def print_menu():
-    print(' 1: Start Search querie')
-    print(' 2: Display all Bookmarks')
-    print(' 3: Search for a bookmark by ID')
-    print(' 4: Delete a Bookmark by ID')
-    print(' 5: Quit')
-
-    message = 'Please enter the number of the menu item you would like to select: '
-    user_selection = get_int_in_range(message, 1, 5)
-    return user_selection
-

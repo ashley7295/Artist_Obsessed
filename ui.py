@@ -15,14 +15,15 @@ def get_int(message):
         except ValueError:
             print('Please enter a number ')
 
+
 def get_int_in_range(message, min, max):
     while True:
         response = get_int(message)
         if response in range (min, max + 1):
             return response
         else:
-            print(f'Please enter a valid number between {min} and {max}')
-
+            print(f'Please enter a valid number between {min} & {max}')
+        
 def program_intro_message():
     print('\n WELCOME TO ~ARTIST OBSESSED~ \n')
     print('The program will search for information about an artist and provide thier follower count, album artwork and song lyrics.')
@@ -52,8 +53,22 @@ def save_bookmark():
         print('Please enter a valid Y/N entry.')
 
 def search_by_id():
-    ID = int(input('Please enter the ID of the Bookmark you would like to select: '))
-    return ID
+    message = 'Please enter the ID of the Bookmark you would like to select: '
+    id = get_int(message)
+    return id
 
 def print_message(msg):
     return print(msg)
+
+
+def print_menu():
+    print(' 1: Start Search querie')
+    print(' 2: Display all Bookmarks')
+    print(' 3: Search for a bookmark by ID')
+    print(' 4: Delete a Bookmark by ID')
+    print(' 5: Quit')
+
+    message = 'Please enter the number of the menu item you would like to select: '
+    user_selection = get_int_in_range(message, 1, 5)
+    return user_selection
+

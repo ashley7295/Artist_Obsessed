@@ -45,9 +45,9 @@ def get_song_name():
 def save_bookmark():
     save_bookmark = input('Do you want to save this as a bookmark? (Y/N): ')
     
-    if save_bookmark == 'Y' or 'y':
+    if save_bookmark == 'Y' or save_bookmark == 'y':
         return True
-    elif save_bookmark == 'N' or 'n': 
+    elif save_bookmark == 'N' or save_bookmark == 'n': 
         return False
     else:
         print('Please enter a valid Y/N entry.')

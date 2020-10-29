@@ -30,18 +30,6 @@ def program_intro_message():
     print('You also can bookmark searches and search from your previously bookmarked searches.')
     print('please select an option below to begin: \n')
 
-def get_artist_name():
-    artist_name = get_string('What is the name of the artist you are searching for?: ')
-    return artist_name
-
-def get_album_name():
-    album_name = get_string('What is the name of the album you are looking for?: ')
-    return album_name
-
-def get_song_name():
-    song_title = get_string('What is the name of the song you are looking for?: ')
-    return song_title
-
 def save_bookmark():
     save_bookmark = input('Do you want to save this as a bookmark? (Y/N): ')
     
@@ -59,16 +47,4 @@ def search_by_id():
 
 def print_message(msg):
     return print(msg)
-
-
-def print_menu():
-    print(' 1: Start Search querie')
-    print(' 2: Display all Bookmarks')
-    print(' 3: Search for a bookmark by ID')
-    print(' 4: Delete a Bookmark by ID')
-    print(' 5: Quit')
-
-    message = 'Please enter the number of the menu item you would like to select: '
-    user_selection = get_int_in_range(message, 1, 5)
-    return user_selection
 

@@ -18,14 +18,12 @@ def main():
         action = menu.get_option(selection)
         action()
 
-
 def setup_menu(menu):
     menu.add(1, 'Start Search query', search)
     menu.add(2, 'Display all Bookmarks', display_all_bookmarks)
     menu.add(3, 'Search for a bookmark by ID', search_for_bookmark_by_id)
     menu.add(4, 'Delete a Bookmark by ID', delete_bookmark)
     menu.add(5, 'Quit', quit_program)
-
 
 def display_all_bookmarks():
     # bookmarks.get_all_bookmarks()
@@ -38,7 +36,6 @@ def delete_bookmark():
     # ID = ui.search_by_id()
     # bookmarks.delete_by_id(ID)
     pass
-
 
 def quit_program():
     ui.print_message('Bye and thank you!')
@@ -59,15 +56,12 @@ def search_spotify(artist):
     
     return followers
 
-
-
 def search_artwork(artist, album):
     """
     @param string artist: artist to search for
     @returns string: image url
     """
     return cover_art_api.get_album_art(artist, album)
-    
 
 def search_lyrics(artist, song_name):
     """
@@ -89,11 +83,14 @@ def search_lyrics(artist, song_name):
         print(response.status_code)
         return 'Lyrics not found.'
 
-#gets variables for the UI of the search queries
 def search():
-    artist_name = ui.get_artist_name()
-    album_title = ui.get_album_name()
-    song_title = ui.get_song_name()
+    """
+    #gets variables for the UI of the search queries
+
+    """
+    artist_name = ui.get_string('What is the name of the artist you are searching for?: ')
+    album_title = ui.get_string('What is the name of the album you are looking for?: ')
+    song_title = ui.get_string('What is the name of the song you are looking for?: ')
     follower_count = search_spotify(artist_name)
     lyrics = search_lyrics(artist_name, song_title)
     artwork = search_artwork(artist_name, album_title)
@@ -113,7 +110,6 @@ def print_search_results(results):
     print(f"Here is the album artwork for {results.get('album_title')}, {results.get('artwork')}")
     print(f"Here are the lyrics for {results.get('song_title')}:") 
     print(results.get('lyrics'))
-    
 
 def save_new_bookmark():
     #TODO once search_results() function can be finished this one can be filled in as well
@@ -123,7 +119,6 @@ def save_new_bookmark():
 
     #bookmarks.add_new_bookmark(artist, album, song, followers, album_art, lyrics)
     pass
-
 
 if __name__ == '__main__':
     main()

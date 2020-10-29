@@ -1,3 +1,6 @@
+"""
+ui class is responsible for getting data from the user, validating data, and displaying data
+"""
 def get_string(message):
     while True:
         response = input(message)
@@ -11,6 +14,7 @@ def get_int(message):
             return response
         except ValueError:
             print('Please enter a number ')
+
 
 def get_int_in_range(message, min, max):
     while True:
@@ -27,18 +31,15 @@ def program_intro_message():
     print('please select an option below to begin: \n')
 
 def get_artist_name():
-    message = 'What is the name of the artist you are searching for?: '
-    artist_name = get_string(message)
+    artist_name = get_string('What is the name of the artist you are searching for?: ')
     return artist_name
 
 def get_album_name():
-    message = 'What is the name of the album you are looking for?: '
-    album_name = get_string(message)
+    album_name = get_string('What is the name of the album you are looking for?: ')
     return album_name
 
 def get_song_name():
-    message = 'What is the name of the song you are looking for?: '
-    song_title = get_string(message)
+    song_title = get_string('What is the name of the song you are looking for?: ')
     return song_title
 
 def save_bookmark():
@@ -68,5 +69,6 @@ def print_menu():
     print(' 5: Quit')
 
     message = 'Please enter the number of the menu item you would like to select: '
-    user_selection = get_int_in_range(message, 1, 6)
+    user_selection = get_int_in_range(message, 1, 5)
     return user_selection
+

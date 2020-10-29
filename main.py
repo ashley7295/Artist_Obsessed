@@ -91,9 +91,9 @@ def search_lyrics(artist, song_name):
 
 #gets variables for the UI of the search queries
 def search():
-    artist_name = ui.get_artist_name()
-    album_title = ui.get_album_name()
-    song_title = ui.get_song_name()
+    artist_name = ui.get_string('What is the name of the artist you are searching for?: ')
+    album_title = ui.get_string('What is the name of the album you are looking for?: ')
+    song_title = ui.get_string('What is the name of the song you are looking for?: ')
     follower_count = search_spotify(artist_name)
     lyrics = search_lyrics(artist_name, song_title)
     artwork = search_artwork(artist_name, album_title)

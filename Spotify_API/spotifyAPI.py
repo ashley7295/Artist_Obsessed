@@ -66,6 +66,9 @@ class SpotifyAPI():
             raise Exception('Could not Authenticate')
         
         data = r.json()
+        return data
+
+    def process_authorization(self, data):
         now = datetime.datetime.now()
         access_token = data['access_token']
         expires_in = data['expires_in'] #seconds
@@ -82,11 +85,9 @@ class SpotifyAPI():
         expires = self.access_token_expires
         now = datetime.datetime.now()
 
-        if expires < now:
-            self.preform_authorization()
-            return self.get_access_token()
-        elif token == None:
-            self.preform_authorization()
+        if expires < now or token == None:
+            data = self.preform_authorization()
+            self.process_authorization(data)
             return self.get_access_token()
         return token
 
@@ -103,7 +104,7 @@ class SpotifyAPI():
         lookup_url = f'{endpoint}'
         r = requests.get(lookup_url,headers=headers, params = data)
         followers = r.json()
-        
+        print(followers)
         return followers
 
     def get_follower_count(self, followers):

@@ -1,3 +1,4 @@
+import unittest
 from unittest import TestCase
 from unittest.mock import patch
 
@@ -42,20 +43,6 @@ class TestUi(TestCase):
         response = ui.save_bookmark()
         self.assertFalse(response)
 
-    @patch("builtins.input", side_effect=["Selena Gomez"])
-    def test_get_artist_name(self, mock):
-        response = ui.get_artist_name()
-        self.assertEqual(response, "Selena Gomez")
-
-    @patch("builtins.input", side_effect=["Rare"])
-    def test_get_album_name(self, mock):
-        response = ui.get_album_name()
-        self.assertEqual(response, "Rare")
-
-    @patch("builtins.input", side_effect=["Dance Again"])
-    def test_get_song_name(self, mock):
-        response = ui.get_song_name()
-        self.assertEqual(response, "Dance Again")
 
 
 if __name__ == '__main__':

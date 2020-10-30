@@ -21,8 +21,8 @@ db.connect()
 db.create_tables([Bookmarks])
 
 #deletes all bookmarks
-#def delete_bookmarks():
-#    Bookmarks.delete().execute()
+def delete_bookmarks():
+    Bookmarks.delete().execute()
 
 #creates a new bookmark
 def add_new_bookmark(artist, album_title, song_title, followers, album_art, lyrics):
@@ -32,7 +32,7 @@ def add_new_bookmark(artist, album_title, song_title, followers, album_art, lyri
 
 #gets total number of bookmarks
 def bookmark_count():
-    count = Bookmarks.select()
+    count = Bookmarks.select().count()
     return count
 
 #searches for bookmark by ID

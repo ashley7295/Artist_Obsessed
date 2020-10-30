@@ -12,48 +12,28 @@ spotify = SpotifyAPI(client_id, client_secret)
 
 class TestSpotifyAPI(TestCase):
     
-    test_response = test_response = {
-        "time": {
-            "updated": "Oct 20, 2020 15:03:00 UTC",
-            "updatedISO": "2020-10-20T15:03:00+00:00",
-            "updateduk": "Oct 20, 2020 at 16:03 BST"
-        },
-        "disclaimer": "This data was produced from the CoinDesk Bitcoin Price Index (USD). Non-USD currency data converted using hourly conversion rate from openexchangerates.org",
-        "chartName": "Bitcoin",
-        "bpi": {
-            "USD": {
-            "code": "USD",
-            "symbol": "&#36;",
-            "rate": "11,906.8495",
-            "description": "United States Dollar",
-            "rate_float": 11906.8495
-            },
-            "GBP": {
-            "code": "GBP",
-            "symbol": "&pound;",
-            "rate": "9,180.5382",
-            "description": "British Pound Sterling",
-            "rate_float": 9180.5382
-            },
-            "EUR": {
-            "code": "EUR",
-            "symbol": "&euro;",
-            "rate": "10,073.3614",
-            "description": "Euro",
-            "rate_float": 10073.3614
-            }
-        }
-    }
+    test_response = {
+   "artists":{
+      "href":"https://api.spotify.com/v1/search?query=beyonce&type=artist&offset=0&limit=20",
+      "items":[
+         {
+            "followers":{
+               "href":"None",
+               "total":24802657
+         }},
+            ]}}
     
-    def test_preform_authorization(self):
-        test = True
-        auth_preformed = spotify.preform_authorization()
-        self.assertTrue(test, auth_preformed)
+    def test_process_authorization(self):
+        test = {'access_token': 1234, 'expires_in': 0}
+        auth_process = spotify.process_authorization(test)
+        self.assertTrue(auth_process)
 
 
-    @patch('spotifyAPI.search_artist_data', side_effect = [test_response])
-    def test_search_artist_data(self, mock_querie):
-        mock_querie = 'beyonce'
-        response = spotify.search_artist_data(mock_querie)
-        self.assertEqual(response, self.test_response)
+    def test_get_follower_count(self):
+        test_follower_count = f'This artist has {24802657:,} followers.'
+        response = spotify.get_follower_count(self.test_response)
+        self.assertEqual(test_follower_count, response)
 
+
+if __name__ == '__main__':
+    unittest.main()

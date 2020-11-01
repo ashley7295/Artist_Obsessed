@@ -6,15 +6,14 @@ import bookmarks
 from bookmarks import Bookmarks
 
 
-test_db = SqliteDatabase('test_bookmarks.sqlite')
 
+test_db = SqliteDatabase('test_bookmarks.sqlite')
 tables = [Bookmarks]
 
 class TestBookmarks(TestCase):
 
     
     def setup(self):
-        test_db.bind(tables, bind_refs=False, bind_backrefs=False)
         test_db.connect()
         test_db.create_tables(tables)
 

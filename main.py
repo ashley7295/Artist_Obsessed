@@ -142,7 +142,6 @@ def save_new_bookmark(results):
     lyrics = results.get('lyrics')
 
     bookmarks.add_new_bookmark(artist, album, song, followers, album_art, lyrics)
-    print('Your Bookmark has been saved!')
     
 
 if __name__ == '__main__':

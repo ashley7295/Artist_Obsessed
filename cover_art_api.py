@@ -12,10 +12,6 @@ load_dotenv()
 
 url = f"http://ws.audioscrobbler.com/2.0"
 key = os.environ.get("COVER_KEY")
-<<<<<<< HEAD
-=======
-
->>>>>>> 65ff8745024b3b9dbada5db2d55dd96e40584f9c
 
 def get_album_art(artist, album):
     query = {"method" : "album.getinfo", "api_key" : key, "artist" : artist, "album" : album, "format" : "json"}
@@ -33,8 +29,8 @@ def get_image_by_size(images, size):
             image_url = i.get("#text")
             return image_url
 
- def image_download(url, file_name):
-     r = requests.get(url)
-     i = Image.open(BytesIO(r.content))
-     i.save(file_name)
-     i.show(file_name)
+def image_download(url, file_name):
+    r = requests.get(url)
+    i = Image.open(BytesIO(r.content))
+    i.save(file_name)
+    i.show(file_name)

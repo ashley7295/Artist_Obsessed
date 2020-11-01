@@ -1,3 +1,9 @@
+#### ARTIST OBSESSED
+#### Summary of the Program:
+
+## This program uses 3 different API's to gather 3 different types of information about a musical artist and thier music for the user. The user will enter an Artists Name, an Album Title and a Song title, they will then get the artists follower count from Spotify, the album artwork for that album and lyrics to the song they requested. The User can also choose to save the information they searched for as a Bookmark and then look back on what they have bookmarked in the past. The user can search for a bookmark, delete a bookmark or view all bookmarks. 
+
+
 ## Quick start
 ### Generate spotify keys for Follower Count
 
@@ -37,3 +43,16 @@
 2. Activiate your virtual environment by running `source {your virutal environment name}/bin/activate`
 3. Install `requirements.txt` by running `pip install -r requirements.txt`
 4. Create `.env` file in your project's root directory if not already created
+
+
+## Screen Shots of the Program Functioning
+
+# Program Starting - Main Menu
+![Main Menu](https://user-images.githubusercontent.com/31251156/97811789-669e4600-1c42-11eb-9242-8e7cff0dd50f.png)
+
+# Selecting Option 1 - Starting Search Querie
+![Option 1 - Start Search](https://user-images.githubusercontent.com/31251156/97811905-2c817400-1c43-11eb-97fb-262f70f3ab13.png)
+
+# Selecting Option 2 - Display All Bookmarks
+![Option 2 - Display All Bookmarks](https://user-images.githubusercontent.com/31251156/97811948-8da94780-1c43-11eb-91f6-a70df8381bee.png)
+

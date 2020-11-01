@@ -89,7 +89,7 @@ def search_lyrics(artist, song_name):
         track = r.get('track')
         return track['text']
     else:
-        print(response.status_code)
+        #print(response.status_code)
         return 'Lyrics not found.'
 
 

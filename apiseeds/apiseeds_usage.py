@@ -4,7 +4,7 @@ from Apiseeds import Apiseeds
 
 load_dotenv()
 
-api_key = os.getenv("apiseeds_api_key")
+api_key = os.getenv("apiseeds_key")
 
 apiseeds = Apiseeds(api_key)
 
@@ -17,4 +17,5 @@ if response.ok and response.status_code == 200:
     print(artist['name'])
     print(track['name'], track['text'])
 else:
-    print(response.status_code)
+    #print(response.status_code)
+    print("")

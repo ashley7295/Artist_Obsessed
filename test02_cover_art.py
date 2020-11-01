@@ -36,3 +36,6 @@ class TestCover(unittest.TestCase):
         i.show(test_file_name)
         self.assertEqual(i , ei)
         self.assertEqual(i.save(test_file_name) , cover_art_api.i.save(test_file_name))
+
+if __name__ == "__main__":
+    unittest.main()

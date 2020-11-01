@@ -20,6 +20,7 @@ class Bookmarks(Model):
 
 db.connect()
 db.create_tables([Bookmarks])
+db.close()
 
 #deletes all bookmarks
 def delete_bookmarks():

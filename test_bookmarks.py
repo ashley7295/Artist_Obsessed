@@ -5,20 +5,20 @@ from peewee import *
 import bookmarks
 from bookmarks import Bookmarks
 
-
-
+MODELS = [Bookmarks]
 test_db = SqliteDatabase('test_bookmarks.sqlite')
-tables = [Bookmarks]
+
 
 class TestBookmarks(TestCase):
 
-    
-    def setup(self):
-        test_db.connect()
-        test_db.create_tables(tables)
+    def setUp(self):
+        test_db.bind(MODELS, bind_refs=False, bind_backrefs=False)
 
-    def teardown(self):
-        test_db.drop_tables(tables)
+        test_db.connect()
+        test_db.create_tables(MODELS)
+
+    def tearDown(self):
+        test_db.drop_tables(MODELS)
         test_db.close()
 
     def clear_bookmarks(self):

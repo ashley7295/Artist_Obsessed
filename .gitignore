@@ -9,4 +9,3 @@ venv
 .vscode
 .DS_Store
 *.sqlite
-__pycache__

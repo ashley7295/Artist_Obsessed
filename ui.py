@@ -26,7 +26,7 @@ def get_int_in_range(message, min, max):
         
 def program_intro_message():
     print('\n WELCOME TO ~ARTIST OBSESSED~ \n')
-    print('The program will search for information about an artist and provide thier follower count, album artwork and song lyrics.')
+    print('The program will search for information about an artist and provide their follower count, album artwork and song lyrics.')
     print('You also can bookmark searches and search from your previously bookmarked searches.')
     print('please select an option below to begin: \n')
 

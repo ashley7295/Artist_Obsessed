@@ -61,8 +61,6 @@ def search_artwork(artist, album):
     @param string artist: artist to search for
     @returns string: image url
     """
-    cover_artist = 
-    x = cover_art_api.
     return cover_art_api.get_album_art(artist, album)
 
 def search_lyrics(artist, song_name):

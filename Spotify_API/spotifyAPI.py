@@ -68,6 +68,7 @@ class SpotifyAPI():
         data = r.json()
         return data
 
+    #processes the Authorization that is retreived from preform_authorization
     def process_authorization(self, data):
         now = datetime.datetime.now()
         access_token = data['access_token']
@@ -79,7 +80,7 @@ class SpotifyAPI():
         self.access_token_did_expire = expires < now
         return True
 
-    #preform_authorization does not get the access token, only checks to see if it exists or hasnt expired
+    #process_authorization does not get the access token, only checks to see if it exists or hasnt expired
     def get_access_token(self):
         token = self.access_token
         expires = self.access_token_expires
@@ -106,11 +107,12 @@ class SpotifyAPI():
         followers = r.json()
         return followers
 
+    #gets and prints the specific follower count we are looking for in the API
     def get_follower_count(self, followers):
         follower_count = followers['artists']['items']
         for i in follower_count:
             followers = i['followers']['total']
-            follower_string = f'This artist has {followers:,} followers.' #f string formats the big numbers with commas
+            follower_string = f'{followers:,}' #f string formats the big numbers with commas
             follower_list = []
             follower_list.append(follower_string)
 

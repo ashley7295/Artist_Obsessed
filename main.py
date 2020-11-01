@@ -25,19 +25,31 @@ def setup_menu(menu):
     menu.add(4, 'Delete a Bookmark by ID', delete_bookmark)
     menu.add(5, 'Quit', quit_program)
 
+#function that calls bookmarks.py to display all bookmarks
 def display_all_bookmarks():
     bookmarks.get_all_bookmarks()
     
-
+#validates if search_by_ID is returning NONE and will print a message to the user, otherwise prints the bookmark
 def search_for_bookmark_by_id():
     ID = ui.search_by_id()
-    bookmark_by_id = bookmarks.search_by_id(ID)
-    print ('\n', bookmark_by_id, '\n')
+    get_by_id = bookmarks.search_by_id(ID)
 
+    if get_by_id == None:
+        print('There is not a bookmark that contains this ID')
+    else:
+        print ('\n', get_by_id, '\n')
+
+#validtes that delete_by_ID is returning NONE and will print a message to the user, otherwise validates the bookmark was deleted
 def delete_bookmark():
     ID = ui.search_by_id()
-    bookmarks.delete_by_id(ID)
+    delete_by_id = bookmarks.delete_by_id(ID)
 
+    if delete_by_id == None:
+        print('There is not a bookmark that contains this ID')
+    else:
+        print(f'\n', 'Your bookmark with bookmark ID:', ID, 'has been deleted', '\n')
+
+#ends the program
 def quit_program():
     ui.print_message('Bye and thank you!')
     exit()
@@ -84,6 +96,7 @@ def search_lyrics(artist, song_name):
         print(response.status_code)
         return 'Lyrics not found.'
 
+
 def search():
     """
     #gets variables for the UI of the search queries
@@ -105,21 +118,36 @@ def search():
         'follower_count': follower_count
     }
     print_search_results(results)
+    save = ui.save_bookmark()
+
+    if save == True:
+        save_new_bookmark(results)
+    else:
+        print('Okay this bookmark will not be saved')
+
+
 
 def print_search_results(results):
+    print("\n")
     print(f"{results.get('artist_name')} has {results.get('follower_count')} followers on spotify")
-    print(f"Here is the album artwork for {results.get('album_title')}, {results.get('artwork')}")
-    print(f"Here are the lyrics for {results.get('song_title')}:") 
+    print(f"Here is the album artwork for {results.get('album_title')}: {results.get('artwork')}")
+    print("*if the photo does not automatically open, press CMD+CLICK on the url to view in your browser")
+    print(f"Here are the lyrics for {results.get('song_title')}:", "\n") 
     print(results.get('lyrics'))
+    print("\n")
 
-def save_new_bookmark():
-    #TODO once search_results() function can be finished this one can be filled in as well
+def save_new_bookmark(results):
+    
+    artist = results.get('artist_name')
+    album = results.get('album_title')
+    song = results.get('song_title')
+    followers = results.get('follower_count')
+    album_art = results.get('artwork')
+    lyrics = results.get('lyrics')
 
-    #artist, album, song = user_search()
-    #followers, album_art, lyrics = search_results()
-
-    #bookmarks.add_new_bookmark(artist, album, song, followers, album_art, lyrics)
-    pass
+    bookmarks.add_new_bookmark(artist, album, song, followers, album_art, lyrics)
+    print('Your Bookmark has been saved!')
+    
 
 if __name__ == '__main__':
     main()

@@ -2,6 +2,7 @@ from peewee import *
 
 db = SqliteDatabase('bookmarks.sqlite')
 
+#a bookmark is created with the search parameters and the search results for the user
 class Bookmarks(Model):
     artist = CharField()
     album_title = CharField()
@@ -35,17 +36,26 @@ def bookmark_count():
     count = Bookmarks.select().count()
     return count
 
-#searches for bookmark by ID
-#TODO test this function once bookmarks can be created
+#searches for bookmark by ID, returns NONE if ID is not in DB
 def search_by_id(ID):
-    rows = Bookmarks.get_by_id(ID)
-    return rows
+    rows = Bookmarks.get_or_none(id = ID)
+    if rows is not None:
+        return rows
+    else:
+        return None
 
-#deletes bookmark by ID
-def delete_by_id(id):
-    Bookmarks.delete().where(Bookmarks.id == id).execute()
-    print('Your bookmark has been deleted')
 
+#deletes bookmark by ID, returns NONE if ID is not in DB
+def delete_by_id(ID):
+    rows = Bookmarks.get_or_none(id = ID)
+
+    if rows == None:
+        return None
+    else:
+        delete_bookmark = Bookmarks.delete().where(Bookmarks.id == ID).execute()
+        return delete_bookmark
+        
+#Gets and displays all the bookmarks in the DB
 def get_all_bookmarks():
     bookmarks = Bookmarks.select()
 
@@ -54,5 +64,3 @@ def get_all_bookmarks():
             print('\n', bookmark, '\n')
     else:
         print('There are no bookmarks currently saved')
-
-#TODO other ways to search/querie the DB for bookmarks?

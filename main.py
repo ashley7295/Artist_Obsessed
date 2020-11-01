@@ -69,12 +69,8 @@ def search_spotify(artist):
     
     return followers
 
-def search_artwork(artist, album):
-    """
-    @param string artist: artist to search for
-    @returns string: image url
-    """
-    return cover_art_api.get_album_art(artist, album)
+def search_artwork(artist, album): # Obtains album cover artwork via cover_art_api.py
+    return cover_art_api.get_album_art(artist, album) # Returns cover art, if found
 
 def search_lyrics(artist, song_name):
     """

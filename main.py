@@ -26,11 +26,12 @@ def setup_menu(menu):
     menu.add(5, 'Quit', quit_program)
 
 def display_all_bookmarks():
-    # bookmarks.get_all_bookmarks()
-    pass
+    bookmarks.get_all_bookmarks()
+    
 
 def search_for_bookmark_by_id():
-    pass
+    ID = ui.search_by_id()
+    bookmarks.search_by_id(ID)
 
 def delete_bookmark():
     # ID = ui.search_by_id()

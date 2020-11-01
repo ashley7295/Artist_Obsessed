@@ -15,7 +15,7 @@ class Bookmarks(Model):
         database = db
 
     def __str__(self):
-        return f'{self.id},{self.artist}, {self.album_title}, {self.song_title}, {self.followers}, {self.album_art}, {self.lyrics}'
+        return f'ID:{self.id}, {self.artist}, {self.album_title}, {self.song_title}, {self.followers}, {self.album_art}, {self.lyrics}'
 
 db.connect()
 db.create_tables([Bookmarks])
@@ -37,9 +37,9 @@ def bookmark_count():
 
 #searches for bookmark by ID
 #TODO test this function once bookmarks can be created
-def search_by_id(id):
-    rows = Bookmarks.select().where(Bookmarks.id == id)
-    return rows
+def search_by_id(ID):
+    rows = Bookmarks.get_by_id(ID)
+    print('\n', rows, '\n')
 
 #deletes bookmark by ID
 def delete_by_id(id):

@@ -31,12 +31,8 @@ class TestCover(unittest.TestCase):
         test_url = cover_art_api.url
         r = requests.get(test_url)
         i = Image.open(BytesIO(r.content))
-        expected_result = cover_art_api.image_download(url, file_name)
+        ei = cover_art_api.image_download.Image.open(BytesIO(r.content))
         i.save(test_file_name)
         i.show(test_file_name)
-        self.assertEqual( , expected_result)
-
-if __name__ == "__main__":
-    i_url = image_url
-    file = "image_download.png"
-    image_download(i_url, file)
+        self.assertEqual(i , ei)
+        self.assertEqual(i.save(test_file_name) , cover_art_api.i.save(test_file_name))

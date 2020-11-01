@@ -33,9 +33,8 @@ def get_image_by_size(images, size):
             image_url = i.get("#text")
             return image_url
 
-# def image_download(url, file_name):
-#     r = requests.get(url)
-#     i = Image.open(BytesIO(r.content))
-#     i.save(file_name)
-#     i.show(file_name)
-
+ def image_download(url, file_name):
+     r = requests.get(url)
+     i = Image.open(BytesIO(r.content))
+     i.save(file_name)
+     i.show(file_name)

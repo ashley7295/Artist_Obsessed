@@ -5,11 +5,14 @@ import shutil
 import os
 import glob
 from pprint import pprint
+from dotenv import load_dotenv
+import logging
+
+load_dotenv()
+
 
 url = f"http://ws.audioscrobbler.com/2.0"
-# key = os.environ.get("COVER_KEY") # "2066002fabe29cf09d7ed5a00c804ac6"
-key = "2066002fabe29cf09d7ed5a00c804ac6"
-print(key)
+key = os.environ.get("COVER_KEY")
 
 # def get_info():
 #    album_input = input("Enter album title: ")
@@ -17,17 +20,21 @@ print(key)
 #    artist_input = input("Enter artist name: ")
 #    artist = f"{artist_input}"
 
-def data(album, artist):
+def get_album_art(artist, album):
     query = {"method" : "album.getinfo", "api_key" : key, "artist" : artist, "album" : album, "format" : "json"}
-    return query
+    try:
+        cover_response = requests.get(url, params=query).json()
+        images = cover_response.get('album').get('image')
+        return get_image_by_size(images, 'large')
+    except Exception as err:
+        logging.error(err)
+        return "Could not find artwork"
 
-# cover_response = requests.get(url, params=query).json()
-# images = cover_response.get('album').get('image')
-
-# for i in images:
-#     if i.get("size") == "large":
-#         image_url = i.get("#text")
-#         print(image_url)
+def get_image_by_size(images, size):
+    for i in images:
+        if i.get("size") == size:
+            image_url = i.get("#text")
+            return image_url
 
 # def image_download(url, file_name):
 #     r = requests.get(url)

@@ -30,7 +30,7 @@ def get_image_by_size(images, size): # Searches for album art by size specificat
             return image_url # Returns size-specific image url
 
 def image_download(url, file_name): # Save and displays image for user
-    r = requests.get(url) # 
+    r = requests.get(url) # Open url
     i = Image.open(BytesIO(r.content)) # Open desired cover art image image
     i.save(file_name) # Save cover art image as a new file name
     i.show(file_name) # Display album cover art to user

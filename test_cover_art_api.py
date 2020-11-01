@@ -20,7 +20,8 @@ class TestCover(unittest.TestCase):
         r = requests.get(cover_art_api.url) # Obtain url from cover_art_api.py
         test_images = r.get("album").get("image") # Looks within API’s “images”
         for i in test_images:
-            if i.get("size") == size: # Looks for size
+            # size variable below has squigglies as "undefined variable"
+            if i.get("size") == size: # Looks for specific image size
                 test_image_url = i.get("#text") # Locates size-specific image
                 return test_image_url # Returns size-specific image
         expected_url = cover_art_api.get_image_by_size("images" , "size") # Expected cover_art_api.py results

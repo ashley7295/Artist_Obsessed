@@ -17,8 +17,7 @@ class TestCover(unittest.TestCase):
         self.assertEqual(test_query , test_query_results) # Confirm test results equal expected results
 
     def test_get_image_by_size(self):
-        test_url = cover_art_api.url # Obtain url from cover_art_api.py
-        r = requests.get(test_url) # Get data from url
+        r = requests.get(cover_art_api.url) # Obtain url from cover_art_api.py
         test_images = r.get("album").get("image") # Looks within API’s “images”
         for i in test_images:
             if i.get("size") == size: # Looks for size
@@ -28,13 +27,14 @@ class TestCover(unittest.TestCase):
         self.assertEqual(test_image_url , expected_url) # Confirm test results equal expected results
 
     def test_image_download(self):
-        test_url = cover_art_api.url # Obtain url from cover_art_api.py
-        r = requests.get(test_url) # Get data from url
+        testValue = True # Set test value to True for future data comparison
+        r = requests.get(cover_art_api.url) # Obtain url from cover_art_api.py
         i = Image.open(BytesIO(r.content)) # Open desired cover art image image
-        i.save(test_file_name) # Save cover art image as a new file name
-        i.show(test_file_name) # Display album cover art to user
-        expected = cover_art_api.image_download(cover_art_api.url, cover_art_api.image_download(file_name) # Expected cover_art_api.py results
-        self.assertEqual(test_image_download(self), expected) # Confirm test results equal expected results
+        test_file_name = "test_image_download.png" # Assign file name
+        save = i.save(test_file_name) # Save cover art image as a assigned file name
+        show = i.show(test_file_name) # Display album cover art to user
+        self.assertTrue(testValue , show) # Confirm test results equal expected results
+        self.assertTrue(testValue , save) # Confirm test results equal expected results
 
 if __name__ == "__main__":
     unittest.main()

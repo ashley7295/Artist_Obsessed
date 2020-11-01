@@ -31,12 +31,12 @@ def display_all_bookmarks():
 
 def search_for_bookmark_by_id():
     ID = ui.search_by_id()
-    bookmarks.search_by_id(ID)
+    bookmark_by_id = bookmarks.search_by_id(ID)
+    print ('\n', bookmark_by_id, '\n')
 
 def delete_bookmark():
-    # ID = ui.search_by_id()
-    # bookmarks.delete_by_id(ID)
-    pass
+    ID = ui.search_by_id()
+    bookmarks.delete_by_id(ID)
 
 def quit_program():
     ui.print_message('Bye and thank you!')
@@ -62,8 +62,6 @@ def search_artwork(artist, album):
     @param string artist: artist to search for
     @returns string: image url
     """
-    cover_artist = 
-    x = cover_art_api.
     return cover_art_api.get_album_art(artist, album)
 
 def search_lyrics(artist, song_name):

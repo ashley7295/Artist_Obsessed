@@ -12,6 +12,7 @@ tables = [Bookmarks]
 
 class TestBookmarks(TestCase):
 
+    
     def setup(self):
         test_db.bind(tables, bind_refs=False, bind_backrefs=False)
         test_db.connect()

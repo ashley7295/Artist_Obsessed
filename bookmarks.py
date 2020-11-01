@@ -39,7 +39,7 @@ def bookmark_count():
 #TODO test this function once bookmarks can be created
 def search_by_id(ID):
     rows = Bookmarks.get_by_id(ID)
-    print('\n', rows, '\n')
+    return rows
 
 #deletes bookmark by ID
 def delete_by_id(id):

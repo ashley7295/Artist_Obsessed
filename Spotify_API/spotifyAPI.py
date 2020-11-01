@@ -104,7 +104,6 @@ class SpotifyAPI():
         lookup_url = f'{endpoint}'
         r = requests.get(lookup_url,headers=headers, params = data)
         followers = r.json()
-        print(followers)
         return followers
 
     def get_follower_count(self, followers):

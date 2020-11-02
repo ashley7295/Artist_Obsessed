@@ -24,11 +24,13 @@ def get_album_art(artist, album): # Searches for album artwork from API query re
         return "Could not find artwork" # Display error reason to user
 
 def get_image_by_size(images, size): # Searches for album art by size specifications
-    for i in images: # Looks within API’s “images”
-        if i.get("size") == size: # Looks for size
-            image_url = i.get("#text") # Locates size-specific image
+    image_list = images["album"]["image"]
+    for i in image_list: # Looks within API’s “images”
+        if i["size"] == size: # Looks for size
+            image_url = i["#text"] # Locates size-specific image
             return image_url # Returns size-specific image url
 
+# Function not required as part of current program. May be a useful function in future.
 def image_download(url, file_name): # Save and displays image for user
     r = requests.get(url) # Open url
     i = Image.open(BytesIO(r.content)) # Open desired cover art image image

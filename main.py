@@ -122,7 +122,7 @@ def search():
         print('Okay this bookmark will not be saved')
 
 
-
+#creates print for the user of their search results
 def print_search_results(results):
     print("\n")
     print(f"{results.get('artist_name')} has {results.get('follower_count')} followers on spotify")
@@ -132,6 +132,7 @@ def print_search_results(results):
     print(results.get('lyrics'))
     print("\n")
 
+#gets the users search params and search results and creates it in a bookmark for the user
 def save_new_bookmark(results):
     
     artist = results.get('artist_name')

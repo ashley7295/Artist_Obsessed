@@ -32,7 +32,7 @@ class TestSpotifyAPI(TestCase):
 
     #test that a follower count is being retrieved
     def test_get_follower_count(self):
-        test_follower_count = f'This artist has {24802657:,} followers.'
+        test_follower_count = f'{24802657:,}'
         response = spotify.get_follower_count(self.test_response)
         self.assertEqual(test_follower_count, response)
 
